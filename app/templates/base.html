@@ -1,10 +1,7 @@
-
-<!-- app/templates/base.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{ title }} | Maintenance_Tracker/title>
+    <title>{{ title }} | Maintenance Tracker</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
@@ -24,8 +21,8 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
                   <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
-                  <li><a href="#">Sign Up</a></li>
-                  <li><a href="#">Sign In</a></li>
+                  <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+                  <li><a href="{{ url_for('auth.login') }}">Login</a></li>
               </ul>
           </div>
         </div>
@@ -46,7 +43,7 @@
                         <li class="footer-menu-divider">⋅</li>
                         <li><a href="#">Login</a></li>
                     </ul>
-                    <p class="copyright text-muted small">Copyright © 2017. All Rights Reserved</p>
+                    <p class="copyright text-muted small">Maintenance Tracker by Wanjiku Njaggah</p>
                 </div>
             </div>
         </div>
