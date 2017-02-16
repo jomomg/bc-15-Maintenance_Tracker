@@ -1,38 +1,41 @@
 from flask import Flask
+#from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
 from config import app_config
+from flask_login import LoginManager
 
-#initialize the app
-#app = Flask(__name__, instance_relative_config=True)
+app = Flask(__name__)
+app.secret_key = '12345678'
 
-#Load the views
-#from app import views
+#initializa databse variable
+db = SQLAlchemy()
+login_manager = LoginManager()
 
-#load config file
-app.config.from_object('config')
-
-db = SQLAlchemy
-
-login_manager = LoginManager() #helps us handle login/outsessions
-
-#Load config file
 def create_app(config_name):
 	app = Flask(__name__, instance_relative_config=True)
 	app.config.from_object(app_config[config_name])
 	app.config.from_pyfile('config.py')
 	db.init_app(app)
-	return app
 
 	login_manager.init_app(app)
-	login_manager.login_message = "You must be logged in to access thi page."
-	login_manager.login_view ='signin'
-	login_manager.session_protection = 'strong'
+	login_manager.login_message = "You must be logged in to access this page."
+	login_manager.login_view ='auth.login'
 
-'''
-	@app.route('/')
-	def hello_world():
-		return 'Hello, World!'
-'''
-from app import models
 
+	return app
+
+
+
+# login_manager = LoginManager() #helps us handle login/outsessions
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///maintenancedb'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+# db.init_app(app)
+# app.app_context().push()
+# db.create_all()
+
+
+# 
+# login_manager.session_protection = 'strong'
+
+#from app import views
