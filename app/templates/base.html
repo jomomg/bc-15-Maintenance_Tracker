@@ -34,7 +34,7 @@
                     <li><a><i class="fa fa-user"></i>  Hi, {{ current_user.username }}!</a></li>
                   {% else %}
                     <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
-                    <li><a href="{{ url_for('auth.register') }}">Sign Up</a></li>
+                    <li><a href="{{ url_for('auth.register') }}">Sign In</a></li>
                     <li><a href="{{ url_for('auth.login') }}">Login</a></li>
                   {% endif %}
               </ul>
