@@ -1,9 +1,11 @@
 # config.py
-
+#import os
 class Config(object):
 	'''
 	Common configuration
 	'''
+	#admin = os.environ.get('admin')
+
 
 class DevelopmentConfig(Config):
 	'''
