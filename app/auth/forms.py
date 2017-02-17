@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, SubmitField, ValidationError
+from wtforms import PasswordField, StringField, SubmitField, ValidationError, SelectField, TextAreaField
 from wtforms.validators import DataRequired, Email, EqualTo
 
 from ..models import User
@@ -33,4 +33,16 @@ class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
+
+class RequestsForm(FlaskForm):
+    staff_id = StringField('staff_id', validators=[DataRequired()])
+    department = SelectField('Select One', choices=[
+                    ('hr', 'HR'), ('marketing', 'Marketing'), ('operations', 'Operations')])
+    description = TextAreaField('Issue Description',
+                                validators=[DataRequired()])
+    photo = StringField('staff_id', validators=[DataRequired()])
+
+    submit = SubmitField('Report Issue')
+
+
 
