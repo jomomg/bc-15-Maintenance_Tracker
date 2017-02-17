@@ -5,6 +5,7 @@ body, html {
 
 body, h1, h2, h3 {
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #0000FF
     font-weight: 700;
 }
 
@@ -13,7 +14,7 @@ a, .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
 }
 
 a:hover, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover {
-  color: #687430;
+  color: #color: #f8f8f8;;
 }
 
 footer {
@@ -39,7 +40,7 @@ p.copyright {
 }
 
 .btn-default:hover {
-    background-color: #aec251;
+    background-color: #cccccc;
 }
 
 .center {
@@ -69,7 +70,7 @@ p.copyright {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url(../img/cover.jpg) no-repeat center center;
+    background: url(../img/bg.jpg) no-repeat center center;
     background-size: cover;
     height: 100%;
 }

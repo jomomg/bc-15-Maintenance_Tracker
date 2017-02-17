@@ -1,9 +1,10 @@
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-from config import app_config
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_bootstrap import Bootstrap
+from config import app_config #third party imports
 
 app = Flask(__name__)
 app.secret_key = '12345678'
@@ -13,9 +14,12 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 
 def create_app(config_name):
+
+	from .admin import admin as admin_blueprint
 	app = Flask(__name__, instance_relative_config=True)
 	app.config.from_object(app_config[config_name])
 	app.config.from_pyfile('config.py')
+	
 	db.init_app(app)
 
 	login_manager.init_app(app)
@@ -24,31 +28,16 @@ def create_app(config_name):
 
 	migrate = Migrate(app, db)
 
+
+	Bootstrap(app)
+
 	from app import models
 
 	from .admin import admin as admin_blueprint
-    app.register_blueprint(admin_blueprint, url_prefix='/admin')
-
-    from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
-
-    from .home import home as home_blueprint
-    app.register_blueprint(home_blueprint)
+	app.register_blueprint(admin_blueprint, url_prefix='/admin')
+	from .auth import auth as auth_blueprint
+	app.register_blueprint(auth_blueprint)
+	from .home import home as home_blueprint
+	app.register_blueprint(home_blueprint)
 
 	return app
-
-
-
-# login_manager = LoginManager() #helps us handle login/outsessions
-
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///maintenancedb'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-# db.init_app(app)
-# app.app_context().push()
-# db.create_all()
-
-
-# 
-# login_manager.session_protection = 'strong'
-
-#from app import views

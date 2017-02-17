@@ -1,23 +1,20 @@
-#import db
-
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
+from werkzeug.security import generate_password_hash, check_password_hash
 from app import db, login_manager
+from datetime import datetime
 
-class User(UserMixin, db.Model):
+
+class User(UserMixin, db.Model):  #user table
 	__tablename__ = 'users'
 	id = db.Column(db.Integer, primary_key=True)
 	first_name = db.Column(db.String(64), unique=False)
 	last_name = db.Column(db.String(64), unique=False)
-	email = db.Column(db.String(64), unique=True, index=True)
-	password_hash = db.Column(db.String(120), unique=False)
-	confirmed = db.Column(db.Boolean, default=False)
-	role = db.Column(db.String(64), unique=False)
-	#is_active = db.Column(db.Boolean, default=True)
+	email = db.Column(db.String(64), unique=True)
+	username = db.Column(db.String(64))
+	password_hash = db.Column(db.String(128))
 	is_admin = db.Column(db.Boolean, default=False)
 
-	requests = db.relationship('Request', backref='user', lazy='dynamic')
+	#requests = db.relationship('Request', backref='user', lazy='dynamic')
 
 	@property 
 	def password(self):
@@ -30,13 +27,14 @@ class User(UserMixin, db.Model):
 
 	def verify_password(self, password):
 		return check_password_hash(self.password_hash, password)
-	"""
-	def get_id(self):
-		return self.id
-	"""
 
 	def __repr__(self):
 		return '<User %r>' % self.first_name
+
+#user loader
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 class Requests(db.Model):
 	__tablename__ = 'requests'
@@ -45,29 +43,21 @@ class Requests(db.Model):
 	staff_id = db.Column(db.String(200), unique=False)
 	description = db.Column(db.String(200), unique=False)
 	department = db.Column(db.String(200), unique=False)
-	date_of_request = 
+	date_of_request = db.Column(db.Date, default=datetime.utcnow)
 	status = db.Column(db.String(64), unique=False, default='default')
-	facility_id = db.Column(db.Integer, db.ForeignKey('facilities.id'))#db.ForeignKey('facilities.id')
 	admin_comments = db.Column(db.String(200), unique=False)
 	assignee_name = db.Column(db.String(64), unique=False)
 	assignee_phone_number = db.Column(db.String(64), unique=False)
-	date_assigned = db.Column(db.String(64), unique=False)
+	date_assigned = db.Column(db.Date)
 	photo = db.Column(db.String(64), unique=False)
-	#user_id = db.Column(db.Integer, unique=False)
-	admin_id = db.Column(db.Integer, unique=False)
+
  
 
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-	#admin_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	user_requests = db.relationship('User', foreign_keys=[user_id], backref='user')
-	#admin_requests = db.relationship('User', foreign_keys=[admin_id], backref='admin')
-
+	
 
 
 
 	def __repr__(self):
-		return '<Request %r>' % self.name
-
-@login_manager.user_loader
-def load_user(user_id):
-return User.query.get(int(user_id))d =
+		return '<Requests %r>' % self.staff_name
