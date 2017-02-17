@@ -1,4 +1,4 @@
-% import "bootstrap/utils.html" as utils %}
+{% import "bootstrap/utils.html" as utils %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% extends "base.html" %}
 {% block title %}Submit{% endblock %}
@@ -8,7 +8,7 @@
   {{ utils.flashed_messages() }}
   <br/>
   <div class="center">
-    <h1>Submit your issues/h1>
+    <h1>Submit your issues</h1>
     <br/>
     {{ wtf.quick_form(form) }}
   </div>
