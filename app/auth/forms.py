@@ -40,7 +40,7 @@ class RequestsForm(FlaskForm):
                     ('hr', 'HR'), ('marketing', 'Marketing'), ('operations', 'Operations')])
     description = TextAreaField('Issue Description',
                                 validators=[DataRequired()])
-    photo = StringField('staff_id', validators=[DataRequired()])
+    photo = StringField('photo', validators=[DataRequired()])
 
     submit = SubmitField('Report Issue')
 
