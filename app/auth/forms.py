@@ -8,10 +8,11 @@ class Registration(FlaskForm):
     """
     Form for users to create new account
     """
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    username = StringField('Username', validators=[DataRequired()])
+    
     first_name = StringField('First Name', validators=[DataRequired()])
     last_name = StringField('Last Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[
                                         DataRequired(),
                                         EqualTo('confirm_password')
@@ -28,9 +29,8 @@ class Registration(FlaskForm):
             raise ValidationError('Username is already in use.')
 
 class LoginForm(FlaskForm):
-    """
-    Form for users to login
-    """
+
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
+
