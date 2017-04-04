@@ -10,7 +10,7 @@ body, h1, h2, h3 {
 }
 
 a, .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
-  color: #aec251;
+  color: #0000FF;
 }
 
 a:hover, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover {
@@ -31,12 +31,12 @@ p.copyright {
     margin: auto;
     color: #687430;
     background-color: #e6ecca;
-    border-color: #aec251;
+    border-color: #0000FF;
 }
 
 .btn-default {
-    border-color: #aec251;
-    color: #aec251;
+    border-color: #0000FF;
+    color: #0000FF;
 }
 
 .btn-default:hover {
