@@ -35,5 +35,7 @@ def create_app(config_name):
     app.register_blueprint(auth_blueprint)
     from .home import home as home_blueprint
     app.register_blueprint(home_blueprint)
+    from .req import req as req_blueprint
+    app.register_blueprint(req_blueprint)
 
     return app
