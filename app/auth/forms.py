@@ -34,15 +34,3 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 
-class RequestsForm(FlaskForm):
-    staff_id = StringField('staff_id', validators=[DataRequired()])
-    department = SelectField('Select One', choices=[
-                    ('hr', 'HR'), ('marketing', 'Marketing'), ('operations', 'Operations')])
-    description = TextAreaField('Issue Description',
-                                validators=[DataRequired()])
-    photo = StringField('photo', validators=[DataRequired()])
-
-    submit = SubmitField('Report Issue')
-
-
-

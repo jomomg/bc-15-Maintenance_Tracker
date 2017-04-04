@@ -2,9 +2,9 @@ from flask import flash, redirect, render_template, url_for
 from flask_login import login_required, login_user, logout_user
 
 from . import auth
-from .forms import LoginForm, Registration, RequestsForm
+from .forms import LoginForm, Registration
 from .. import db
-from ..models import User, Requests
+from ..models import User
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -40,28 +40,10 @@ def login():
             if user.is_admin:
                 return redirect(url_for('home.admin_dashboard'))
             else:
-                return redirect('/login/submitrequest')
+                return redirect(url_for('home.dashboard'))
         else:
             flash('Invalid email or password.')
     return render_template('auth/login.html', form=form, title='Login')
-
-
-@auth.route('/login/submitrequest', methods=['GET', 'POST'])
-# @login_required
-def make_request():
-    form = RequestsForm()
-    if form.validate_on_submit():
-        submit = Requests(staff_id=form.staff_id.data,
-                          department=form.department.data,
-                          description=form.description.data,
-                          photo=form.photo.data
-                          )
-        db.session.add(submit)
-        db.session.commit()
-        flash('Your request has been received and is being processed')
-        #return redirect(url_for('index'))
-    return render_template('auth/submit.html',
-                           form=form, title='Submit request')
 
 
 @auth.route('/logout')
@@ -69,6 +51,6 @@ def make_request():
 def logout():
     logout_user()
     flash('You have successfully been logged out.')
-
-    # redirect to the login page
     return redirect(url_for('auth.login'))
+
+ 
