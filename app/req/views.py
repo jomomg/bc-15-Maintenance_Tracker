@@ -32,8 +32,8 @@ def submitrequest():
 def viewrequests():
 
 	#user = User.query.filter_by(id=current_user.id).first()
-	#all_requests = Requests.query.all()
-	all_requests = Requests.query.filter_by(id=current_user.id).first()
+	all_requests = Requests.query.all()
+	#all_requests = Requests.query.filter_by(id=current_user.id).first()
 	
 	return render_template('req/myrequests.html', my_requests=all_requests)
 
