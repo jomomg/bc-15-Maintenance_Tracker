@@ -1,0 +1,35 @@
+{% import "bootstrap/utils.html" as utils %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+{% block title %}View Requests{% endblock %}
+{% block body %}
+<div class="content-section">
+  <br/><br/>
+  <div class="center">
+    <h1>Submitted issues</h1>
+    <br/>
+    <table class="table table-bordered">
+     <thead>
+     	<tr>
+     		<th width="10%"> Description</th>
+     		<th width="25%"> Department </th>
+      	<th width="5%"> Date </th>
+      	<th width="8%"> Photo </th>
+     	</tr>
+     </thead>
+     <tbody>
+
+     	{% for i in my_requests %}
+     	<tr>
+     		<td>{{i.description}}</td>
+     		<td>{{i.department}}</td>
+     		<td>{{i.date_of_request}}</td>
+     		<td>{{i.photo}}</td>
+     	</tr>
+      {% endfor %}
+     </tbody>
+    </table>
+   
+  </div>
+</div>
+{% endblock %}

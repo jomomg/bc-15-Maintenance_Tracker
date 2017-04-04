@@ -11,36 +11,36 @@
     <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
         <div class="container topnav">
           <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#1bs-example-navbar-collapse-1">
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <p>Maintenance Tracker</p>
+              <a class="navbar-brand topnav" href="{{ url_for('home.homepage') }}">Maintenance Tracker</a>
+
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                    <ul class="nav navbar-nav navbar-right">
                     {% if current_user.is_authenticated %}
                     {% if current_user.is_admin %}
                       <li><a href="{{ url_for('home.admin_dashboard') }}">Dashboard</a></li>
-                      <li><a href="#">Departments</a></li>
+                      <li><a href="#">View Requests</a></li>
                       <li><a href="#">Roles</a></li>
-                      <li><a href="#">Employees</a></li>
+                      <li><a href="#">Add Assignee</a></li>
                     {% else %}
                       <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>
                     {% endif %}
                     <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-                    <li><a><i class="fa fa-user"></i>  Hi, {{ current_user.username }}!</a></li>
-                  {% else %}
+                    <li><a><i class="fa fa-user"></i>  Hi, {{ current_user.username }}!</a></li>   
+                    {% else %}
                     <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
                     <li><a href="{{ url_for('auth.register') }}">Sign Up</a></li>
                     <li><a href="{{ url_for('auth.login') }}">Login</a></li>
                   {% endif %}
               </ul>
         
-                  
-              </ul>
+      
           </div>
         </div>
     </nav>
@@ -53,10 +53,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                   <ul class="list-inline">
+                        <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
+                        <li class="footer-menu-divider">⋅</li>
+                        {% if current_user.is_authenticated %}
+                        <li><a href="{{url_for('auth.logout')}}">Logout</a></li>
+                        {% else %}
+                        <li><a href="{{ url_for('auth.register')}}">Sign Up</a></li>
+                        <li class="footer-menu-divider">⋅</li>
+                        <li><a href="{{url_for('auth.login')}}">Sign In</a></li>
+                        {% endif %}
+                    </ul>
                     <p class="copyright text-muted small">Maintenance Tracker by Wanjiku Njaggah</p>
                 </div>
             </div>
         </div>
     </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 </html>
