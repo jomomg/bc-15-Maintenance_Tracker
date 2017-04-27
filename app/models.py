@@ -51,10 +51,7 @@ class Requests(db.Model):
     admin_comments = db.Column(db.String(200), unique=False)
     date_assigned = db.Column(db.String(200), unique=False)
     photo = db.Column(db.String(64), unique=False) 
-    #user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     #user_requests = db.relationship('User', foreign_keys=[user_id], backref='user')
 
-
-    def __repr__(self):
-        return '<Requests %r>' % self.staff_name
 
